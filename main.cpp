@@ -76,7 +76,7 @@ int main()
         category_idx[header] = i;
     }
     
-	//placeholder until we can get the GUI working
+	  //placeholder until we can get the GUI working
     int answer;
     
     cout << "Which category do you want to sort by: Name(0), Best Resolution(1), Memory(2), Memory Type(3), or Manufacturer(4)?" << endl;
@@ -114,10 +114,10 @@ int main()
     int column_index = category_idx[main_node_idx];
     cout << "Printing column: " << main_node_idx << " (index " << column_index << ")" << endl;
     
-	vector<list<string>> column_to_be_sorted;
-	parse_column(data, column_to_be_sorted, column_index);
+	  vector<list<string>> column_to_be_sorted;
+	  parse_column(data, column_to_be_sorted, column_index);
 
-	for(auto item :  column_to_be_sorted[0]) cout << item << endl;
+	  for(auto item :  column_to_be_sorted[0]) cout << item << endl;
     
     return 0;
 }
