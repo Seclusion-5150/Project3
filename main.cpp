@@ -20,26 +20,25 @@ void print_data(vector<vector<string>> data)
 
 int main()
 {
-cout << "Hello World!" << endl;
+
+	vector<vector<string>> data;
+	string file_name = "All_GPUs.csv";
+	ifstream file(file_name);
 	
-	// vector<vector<string>> data;
-	// string file_name = "All_GPUs.csv";
-	// ifstream file(file_name);
+	string line;
+	while(getline(file, line))
+	{
+		vector<string> row;
+		stringstream ss(line);
+		string cell;
+		while(getline(ss, cell, ','))
+		{
+			row.push_back(cell);
+		}
+		data.push_back(row);
+	}
 	
-	// string line;
-	// while(getline(file, line))
-	// {
-	// 	vector<string> row;
-	// 	stringstream ss(line);
-	// 	string cell;
-	// 	while(getline(ss, cell, ','))
-	// 	{
-	// 		row.push_back(cell);
-	// 	}
-	// 	data.push_back(row);
-	// }
-	
-	// print_data(data);
-	// cout << data[0].size() << endl;
+	print_data(data);
+	cout << data[0].size() << endl;
 	return 0;
 }
