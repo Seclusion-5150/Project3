@@ -8,6 +8,44 @@
 #include <list>
 using namespace std;
 
+// Constants for category selection
+const vector<string> CATEGORIES = {
+    "Name", "Best_Resolution", "Memory", "Memory_Type", "Manufacturer"
+};
+
+// Heap Sort implementation
+void heapify(vector<list<string>>& data, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && data[left].front() > data[largest].front())
+        largest = left;
+
+    if (right < n && data[right].front() > data[largest].front())
+        largest = right;
+
+    if (largest != i) {
+        swap(data[i], data[largest]);
+        heapify(data, n, largest);
+    }
+}
+
+void heapSort(vector<list<string>>& data) {
+    int n = data.size();
+
+    // Build max heap
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(data, n, i);
+
+    // Extract elements
+    for (int i = n - 1; i > 0; i--) {
+        swap(data[0], data[i]);
+        heapify(data, i, 0);
+    }
+}
+
+
 // Properly parse CSV, handling quoted fields
 vector<string> parseCSVLine(const string& line) {
     vector<string> result;
@@ -52,11 +90,9 @@ void parse_column(vector<vector<string>>& data, vector<list<string>> &column_dat
 	}
 
 }
-
-int main()
+void load_data(vector<list<string>> &column_to_be_sorted, int answer, string file_name)
 {
-    vector<vector<string>> data;
-    string file_name = "All_GPUs.csv";
+	vector<vector<string>> data;
     ifstream file(file_name);
     
     map<string, int> category_idx;
@@ -75,12 +111,6 @@ int main()
         
         category_idx[header] = i;
     }
-    
-	  //placeholder until we can get the GUI working
-    int answer;
-    
-    cout << "Which category do you want to sort by: Name(0), Best Resolution(1), Memory(2), Memory Type(3), or Manufacturer(4)?" << endl;
-    cin >> answer;
     
     string main_node_idx = "";
     switch(answer)
@@ -109,15 +139,17 @@ int main()
         vector<string> row = parseCSVLine(line);
         data.push_back(row);
     }
-    
-    // Print the selected column
     int column_index = category_idx[main_node_idx];
-    cout << "Printing column: " << main_node_idx << " (index " << column_index << ")" << endl;
-    
-	  vector<list<string>> column_to_be_sorted;
-	  parse_column(data, column_to_be_sorted, column_index);
+	parse_column(data, column_to_be_sorted, column_index);
 
-	  for(auto item :  column_to_be_sorted[0]) cout << item << endl;
-    
+}
+
+int main()
+{
+  
+    string file_name = "All_GPUs.csv";
+	vector<list<string>> column_to_be_sorted;
+	load_data(column_to_be_sorted, 0, file_name);
+	
     return 0;
 }
