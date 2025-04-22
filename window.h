@@ -118,8 +118,8 @@ GUI::GUI(int _WIDTH, int _HEIGHT) {
     this->wc.HEIGHT = _HEIGHT;
 
     // Set window title and GUI title
-    this->wc.TITLE = "Project 3";
-    this->wc.GUI_TITLE = "GUI Information";
+    this->wc.TITLE = "Albert's GPU Catalogue";
+    this->wc.GUI_TITLE = "Albert's GPU Catalogue";
 
     // Create SFML window
     this->wc.window = new sf::RenderWindow(sf::VideoMode(wc.WIDTH, wc.HEIGHT), wc.TITLE);
