@@ -6,6 +6,8 @@
 #include <vector>
 #include "window.h"
 
+#include <SFML/Graphics.hpp>
+
 using namespace std;
 
 // Constants for category selection
@@ -13,11 +15,14 @@ const vector<string> CATEGORIES = {
     "Name", "Best_Resolution", "Memory", "Memory_Type", "Manufacturer"
 };
 
+
+// Heap Sort implementation
+
 void heapify(vector<list<string>>& data, int n, int i) {
     int largest = i;
     int left = 2 * i + 1;
     int right = 2 * i + 2;
-
+  
     // If left child is larger than root
     if (left < n && data[left].front() > data[largest].front())
         largest = left;
@@ -27,6 +32,7 @@ void heapify(vector<list<string>>& data, int n, int i) {
         largest = right;
 
     // If largest is not root
+
     if (largest != i) {
         swap(data[i], data[largest]);
         heapify(data, n, largest);
@@ -45,6 +51,7 @@ void heapSort(vector<list<string>>& data) {
         // Move current root to end
         swap(data[0], data[i]);
         // call max heapify on the reduced heap
+
         heapify(data, i, 0);
     }
 }
@@ -597,5 +604,6 @@ int main() {
     }
 
     delete wc.window;
+
     return 0;
 }
